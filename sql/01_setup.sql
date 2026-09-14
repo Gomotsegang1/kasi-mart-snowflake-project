@@ -1,15 +1,17 @@
--- Kasi Mart Data Engineering Project 1
--- Snowflake setup and table creation
-
-
 USE DATABASE DE_PROJECT1;
 USE SCHEMA KASI_MART;
 
--- Customers dimension table
-CREATE TABLE CUSTOMERS (
-    customer_id VARCHAR(20),
-    customer_name VARCHAR(100),
-    email VARCHAR(255),
-    province VARCHAR(50),
-    signup_date DATE
-);
+-- Load customers.csv into CUSTOMERS
+COPY INTO CUSTOMERS
+FROM @KASI_MART_STAGE/customers.csv
+FILE_FORMAT = KASI_MART_CSV_FORMAT;
+
+-- Load products.csv into PRODUCTS
+COPY INTO PRODUCTS
+FROM @KASI_MART_STAGE/products.csv
+FILE_FORMAT = KASI_MART_CSV_FORMAT;
+
+-- Load orders.csv into ORDERS
+COPY INTO ORDERS
+FROM @KASI_MART_STAGE/orders.csv
+FILE_FORMAT = KASI_MART_CSV_FORMAT;
